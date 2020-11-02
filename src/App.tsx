@@ -1,13 +1,34 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
+import { Navbar } from "./components/navbar";
+import { TodoForm } from "./components/todoform";
+import { TodoList } from "./components/todolis";
+import { ITodo } from "./interfaces";
 
-function App() {
+// FC - FunctionComponent
+
+const App: React.FC = () => {
+  const [todos, setTodos] = useState<ITodo[]>([]);
+
+  const addHandler = (title: string) => {
+    const newTodo = {
+      title: title,
+      id: Date.now(),
+      completed: false,
+    };
+    setTodos((prev) => [newTodo, ...prev]);
+    //  setTodos([newTodo, ...todos]);
+  };
+
   return (
     <div className="app">
-      <h1>{"Hello TypeScript"}</h1>
+      <Navbar />
+      <div className="container">
+        <TodoForm onAdd={addHandler} />
+        <TodoList todos={todos} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;

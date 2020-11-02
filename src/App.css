@@ -4,3 +4,24 @@
   border-left: 1px solid #333333;
   border-right: 1px solid #333333;
 }
+
+.todo {
+  margin-bottom: 1rem;
+}
+
+.todo.complited {
+  text-decoration: line-through;
+}
+
+.todo label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.todo i {
+  z-index: 2;
+}

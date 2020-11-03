@@ -1,31 +1,25 @@
-import React, { useState } from "react";
-import "./App.css";
-import { Navbar } from "./components/navbar";
-import { TodoForm } from "./components/todoform";
-import { TodoList } from "./components/todolis";
-import { ITodo } from "./interfaces";
+import React from 'react';
+import './App.css';
+import { Navbar } from './components/navbar';
+import { TodoPage } from './pages/todopage';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { AboutPage } from './pages/aboutpage';
 
 // FC - FunctionComponent
 
+declare var confirm: (question: string) => boolean;
+
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  const addHandler = (title: string) => {
-    const newTodo = {
-      title: title,
-      id: Date.now(),
-      completed: false,
-    };
-    setTodos((prev) => [newTodo, ...prev]);
-    //  setTodos([newTodo, ...todos]);
-  };
-
   return (
     <div className="app">
-      <Navbar />
       <div className="container">
-        <TodoForm onAdd={addHandler} />
-        <TodoList todos={todos} />
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route component={TodoPage} path="/" exact />
+            <Route component={AboutPage} path="/about" />
+          </Switch>
+        </BrowserRouter>
       </div>
     </div>
   );
